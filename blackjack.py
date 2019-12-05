@@ -24,14 +24,14 @@ class Player:
     def calculate(self):
         if len(self.hand) < 2:
             return 0
-        values = list(map(lambda cart: cart["value"] ,self.hand))
+        values = list(map(lambda card: card["value"] ,self.hand))
         return functools.reduce(lambda a,b: a+b, values)
 
     def getMore(self):
         return True if self.calculate() < 16 else False
 
     def getTotal(self):
-        values = list(map(lambda cart: cart["value"] ,self.hand))
+        values = list(map(lambda card: card["value"] ,self.hand))
         return functools.reduce(lambda a,b: a+b, values)
 
     def __str__(self):
@@ -42,7 +42,7 @@ class Player:
 
 if __name__ == "__main__":
     
-    random.shuffle(DECK) #sorting the DECK to get random cart
+    random.shuffle(DECK) #sorting the DECK to get random card
 
     n = int(input("how many players you want: "))
     
@@ -55,13 +55,13 @@ if __name__ == "__main__":
     while True:
         for i in range(n):
             if players[i].getMore():
-                cart = DECK.pop()
-                print("cart: ", cart)
-                players[i].addCard(cart)
+                card = DECK.pop()
+                print("card: ", card)
+                players[i].addCard(card)
         if house.getMore():
-            cart = DECK.pop()
-            print("cart: ", cart)
-            house.addCard(cart)
+            card = DECK.pop()
+            print("card: ", card)
+            house.addCard(card)
 
         more = list(map(lambda p: p.getMore(),players))
         more = list(map(lambda s: not s ,more))
